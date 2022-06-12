@@ -59,3 +59,15 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.name
 
+
+class Car(models.Model):
+    name=models.CharField(max_length=255)
+    car_model=models.CharField(max_length=255)
+    is_repaired=models.BooleanField(default=False)
+    is_finished=models.BooleanField(default=False)
+
+
+class Part(models.Model):
+    car=models.ManyToManyField(Car)
+    price=models.PositiveIntegerField()
+    name=models.CharField(max_length=255)
