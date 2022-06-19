@@ -1,9 +1,29 @@
 from django.contrib import admin
-
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .models import Car, User, Part
 
-admin.site.register(User)
 admin.site.register(Part)
+
+
+
+class UserAdmin(BaseUserAdmin):
+    ordering=["id"]
+    list_display = ['email','role']
+    fieldsets = (
+        (None, {"fields": ("email", "password","role")}),
+        (
+            "Permissions",
+            {"fields": ("is_active", "is_staff", "is_superuser")}
+        ),
+        ("Important dates", {"fields": ("last_login",)})
+    )
+
+    add_fieldsets = (
+        (None, {
+            "classes": ("wide",),
+            "fields": ("email", "password1", "password2","role")
+        }),
+    )
 
 
 class CarAdmin(admin.ModelAdmin):
@@ -35,3 +55,5 @@ class CarAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Car, CarAdmin)
+admin.site.register(User, UserAdmin)
+
