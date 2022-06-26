@@ -1,0 +1,43 @@
+version: "3"
+
+services:
+  django_web:
+    build: .
+    command: >
+      ash -c " python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/app/
+    ports:
+      - 8000:8000
+    env_file:
+      - ./.env
+    depends_on:
+      - postgres_db
+    restart: on-failure
+  postgres_db:
+    container_name: "postgres_database"
+    image: postgres:12.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+##    environment:
+##      - POSTGRES_USER=ashkan
+##      - POSTGRES_PASSWORD=mapsa
+##      - POSTGRES_DB=tourism
+##
+##  redis:
+##    image: redis:alpine
+##  celery:
+##    restart: always
+##    build:
+##      context: .
+##    command: >
+##      ash -c "touch celery.log && touch celery_beat.log && celery -A logic worker -l info &> celery.log & celery -A logic beat -l info -S django &> celery_beat.log"
+##    volumes:
+##      - .:/app
+##    depends_on:
+##      - django_web
+##      - redis
+##volumes:
+##  postgres_data:
+##  static:
+##  media:

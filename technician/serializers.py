@@ -3,7 +3,7 @@ from rest_framework import serializers
 from core.models import Car
 
 
-class TechnicianRapairCarSerializer(serializers.ModelSerializer):
+class TechnicianRepairCarSerializer(serializers.ModelSerializer):
     class Meta:
         model = Car
         fields = "__all__"

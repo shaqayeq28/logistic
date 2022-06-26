@@ -8,7 +8,7 @@ from rest_framework.views import APIView
 from core.permissions import IsTechnician
 
 from core.models import Car
-from technician.serializers import TechnicianRapairCarSerializer, TechnicianAddPartSerializer
+from technician.serializers import TechnicianRepairCarSerializer, TechnicianAddPartSerializer
 
 
 # Create your views here.
@@ -16,7 +16,7 @@ from technician.serializers import TechnicianRapairCarSerializer, TechnicianAddP
 
 class RepairUpdate(UpdateAPIView):
     queryset = Car.objects.all()
-    serializer_class = TechnicianRapairCarSerializer
+    serializer_class = TechnicianRepairCarSerializer
     permission_classes = [IsTechnician]
 
 
